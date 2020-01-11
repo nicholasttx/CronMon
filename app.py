@@ -46,5 +46,5 @@ while 1:
             with open('resuilt.txt', 'a') as f:
                 f.write("Pod Name: {0}/{1} -- Pod State: {2} \n".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
    
-   # sleep the program
-   time.sleep(60) 
+    # sleep the program
+    time.sleep(60) 
