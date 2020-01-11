@@ -47,7 +47,7 @@ while 1:
             if item["status"]["phase"].lower() != "running":
                 # writing data in to a file
                 with open('resuilt.txt', 'a') as f:
-                f.write("POD Error! --  {0}/{1}".format(item.["metadata"]["namespace"],item["metadata"]["name"]))
+                    f.write("POD Error! --  {0}/{1} is at <{2}>\n".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
 #                f.write("Pod Name: {0}/{1} -- Pod State: {2} \n".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
 
 
