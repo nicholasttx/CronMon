@@ -30,6 +30,8 @@ podsDataList = []
 
 # adding while loop to avoid openshift 'crashloopback' pod error
 while 1:
+
+#####################################################################################
     # loop the list to get pods in each namespace
     for ns in namespaces:
        apiUrl = myUrl + "/api/v1/namespaces/{0}/pods".format(ns)
@@ -40,10 +42,17 @@ while 1:
     # looping podsDataList to get all pods states
     for podData in podsDataList:
         for item in podData["items"]:
-    #        print "Pod Name: {0}/{1} -- Pod State: {2}".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"])
-            # writing data in to a file
-            with open('resuilt.txt', 'a') as f:
-                f.write("Pod Name: {0}/{1} -- Pod State: {2} \n".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
-   
+            # check if pod is at 'Running' state
+            # if not, the report problems:
+            if item["status"]["phase"].lower() != "running":
+                # writing data in to a file
+                with open('resuilt.txt', 'a') as f:
+                f.write("POD Error! --  {0}/{1}".format(item.["metadata"]["namespace"],item["metadata"]["name"]))
+#                f.write("Pod Name: {0}/{1} -- Pod State: {2} \n".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
+
+
+
+####################################################################################
+
     # sleep the program
     time.sleep(60) 
