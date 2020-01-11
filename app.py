@@ -9,11 +9,7 @@ import time
 config = ConfigParser.ConfigParser()
 
 # read INI file
-#config.readfp(open('config.ini'))
-
-# using .ini file from github
-config.readfp(open('https://raw.githubusercontent.com/nicholasttx/CronMon/master/config.ini'))
-
+config.readfp(open('config.ini'))
 
 # get data
 myToken = config.get("base_info", "token")
