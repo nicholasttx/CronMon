@@ -31,7 +31,7 @@ podsDataList = []
 # loop the list to get pods in each namespace
 for ns in namespaces:
    apiUrl = myUrl + "/api/v1/namespaces/{0}/pods".format(ns)
-   podsData = requests.get(apiUrl, headers=headers).json()
+   podsData = requests.get(apiUrl, headers=headers,verify=False).json()
    podsDataList.append(podsData)
 
 #print podsData['items'][1]['status']['phase']
