@@ -2,6 +2,7 @@
 import ConfigParser
 import requests
 import json
+import urllib3
 
 # initialize instance
 config = ConfigParser.ConfigParser()
@@ -17,6 +18,9 @@ myUrl = config.get("base_info", "apiUrl")
 
 # get namespace list
 namespaces = config.get("namespaces", "namespaces").split(',')
+
+# disable https certificate verify
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # get API call response
 headers = {"Authorization": "Bearer {0}".format(myToken)}
