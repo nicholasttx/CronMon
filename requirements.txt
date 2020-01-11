@@ -1,2 +1,2 @@
-Requests==2.5.1
+Requests==2.20.0
 urllib3
