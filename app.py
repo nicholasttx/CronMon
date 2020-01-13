@@ -4,12 +4,21 @@ import requests
 import json
 import urllib3
 import time
+import urllib2
+import StringIO
 
 # initialize instance
 config = ConfigParser.ConfigParser()
 
 # read INI file
-config.readfp(open('config.ini'))
+#config.readfp(open('config.ini'))
+# getting ini file from git
+req = urllib2.Request("https://raw.githubusercontent.com/nicholasttx/CronMon/master/config.ini")
+response = urllib2.urlopen(req)
+iniContent = response.read()
+strbuf = StringIO.StringIO(iniContent)
+config.readfp(strbuf)
+
 
 # get data
 myToken = config.get("base_info", "token")
