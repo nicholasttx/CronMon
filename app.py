@@ -6,7 +6,7 @@ import urllib3
 import time
 import urllib2
 import StringIO
-from Pod import Pod
+from Pod.Pod import Pod
 
 # initialize instance
 config = ConfigParser.ConfigParser()
@@ -14,7 +14,7 @@ config = ConfigParser.ConfigParser()
 # read INI file
 #config.readfp(open('config.ini'))
 # getting ini file from git
-req = urllib2.Request("https://stash.softlayer.local/users/ttang/repos/pods-mon-nope69/raw/config.ini")
+req = urllib2.Request("https://raw.githubusercontent.com/nicholasttx/CronMon/dev/config.ini")
 response = urllib2.urlopen(req)
 iniContent = response.read()
 strbuf = StringIO.StringIO(iniContent)
