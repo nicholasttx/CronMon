@@ -51,15 +51,15 @@ for podData in podsDataList:
     for item in podData["items"]:
         # check if pod is at 'Running' state
         # if not, the report problems:
-        if item["status"]["phase"].lower() != "running":
+#        if item["status"]["phase"].lower() != "running":
             # writing data in to a file
-            with open('result.txt', 'a') as f:
-                f.write("POD Error! --  {0}/{1} is at <{2}>\n".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
+#            with open('result.txt', 'a') as f:
+#                f.write("POD Error! --  {0}/{1} is at <{2}>\n".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
 #                f.write("Pod Name: {0}/{1} -- Pod State: {2} \n".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
-
+        print ("Pod Name: {0}/{1} -- Pod State: {2} ".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
 
 
 ####################################################################################
 
 # sleep the program
-time.sleep(20) 
+#time.sleep(20) 
