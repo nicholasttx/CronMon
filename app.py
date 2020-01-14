@@ -6,6 +6,7 @@ import urllib3
 import time
 import urllib2
 import StringIO
+from Pod import Pod
 
 # initialize instance
 config = ConfigParser.ConfigParser()
@@ -13,7 +14,7 @@ config = ConfigParser.ConfigParser()
 # read INI file
 #config.readfp(open('config.ini'))
 # getting ini file from git
-req = urllib2.Request("https://raw.githubusercontent.com/nicholasttx/CronMon/master/config.ini")
+req = urllib2.Request("https://stash.softlayer.local/users/ttang/repos/pods-mon-nope69/raw/config.ini")
 response = urllib2.urlopen(req)
 iniContent = response.read()
 strbuf = StringIO.StringIO(iniContent)
@@ -45,21 +46,29 @@ for ns in namespaces:
     podsData = requests.get(apiUrl, headers=headers,verify=False).json()
     podsDataList.append(podsData)
 
+# Pod List which stores pods info
+podsList = []
 
 # looping podsDataList to get all pods states
 for podData in podsDataList:
     for item in podData["items"]:
         # check if pod is at 'Running' state
         # if not, the report problems:
-#        if item["status"]["phase"].lower() != "running":
-            # writing data in to a file
-#            with open('result.txt', 'a') as f:
-#                f.write("POD Error! --  {0}/{1} is at <{2}>\n".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
-#                f.write("Pod Name: {0}/{1} -- Pod State: {2} \n".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
-        print ("Pod Name: {0}/{1} -- Pod State: {2} ".format(item["metadata"]["namespace"],item["metadata"]["name"], item["status"]["phase"]))
+        if item["status"]["phase"].lower() != "running":
+            # setting pod info
+            myPod = Pod()
+            myPod.name = item["metadata"]["name"]
+            myPod.namespaces = item["metadata"]["namespace"]
+            myPod.status = item["status"]["phase"]
 
+            # adding pod info to the pod list
+            podsList.append(myPod)
+
+# let's do a print test
+for pod in podsList:
+    print "Pod name: {0}/{1}, Pod state: {2}".format(pod.namespace,pod.name,pod.state)
 
 ####################################################################################
 
 # sleep the program
-#time.sleep(20) 
+#time.sleep(20)
