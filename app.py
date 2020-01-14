@@ -54,12 +54,12 @@ for podData in podsDataList:
     for item in podData["items"]:
         # check if pod is at 'Running' state
         # if not, the report problems:
-        if item["status"]["phase"].lower() != "running":
+#        if item["status"]["phase"].lower() != "running":
             # setting pod info
-            myPod = Pod()
+            myPod = Pod()  
             myPod.name = item["metadata"]["name"]
-            myPod.namespaces = item["metadata"]["namespace"]
-            myPod.status = item["status"]["phase"]
+            myPod.namespace = item["metadata"]["namespace"]
+            myPod.state = item["status"]["phase"]
 
             # adding pod info to the pod list
             podsList.append(myPod)
